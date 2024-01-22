@@ -22,7 +22,7 @@ app.use(credentials)
 app.use(cors(corsOptions))
 
 // application.x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true}))
+app.use(express.urlencoded({ extended: false }))
 
 // application/json response
 app.use(express.json())
@@ -38,7 +38,7 @@ app.use(errorHandlerMiddleware)
 
 
 // Routes
-app.use('api/auth', require('./routes/api/auth'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 app.all('*', (req, res) => {
     res.status(404)
