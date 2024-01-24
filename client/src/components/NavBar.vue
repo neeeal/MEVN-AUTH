@@ -20,12 +20,20 @@
             <router-link :to="{name:'register'}" class="nav-link" aria-current="page">Register</router-link>
           </li>
           <li class="nav-item dropdown">
+<<<<<<< HEAD
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+=======
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+>>>>>>> 8fcbbe6e7664e14ba22a11f881a6288e31b9d390
               User
             </a>
             <ul class="dropdown-menu">
               <li><router-link :to="{name:'user'}" class="dropdown-item">Username</router-link></li>
+<<<<<<< HEAD
               <li><hr class="dropdown-divider"></li>
+=======
+              <li><div class="dropdown-divider"></div></li>
+>>>>>>> 8fcbbe6e7664e14ba22a11f881a6288e31b9d390
               <li><button class="dropdown-item btn btn-danger">Logout</button></li>
             </ul>
           </li>
