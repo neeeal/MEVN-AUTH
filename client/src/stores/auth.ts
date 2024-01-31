@@ -16,12 +16,14 @@ export interface State{
 
 export interface LoginData{
     email: string,
-    password: string,
+    password: string
 }
 
 export interface RegisterData{
+    username: string,
     email: string,
     password: string,
+    password_confirm: string
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -40,8 +42,9 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async login(payload: LoginData){
             try {
-                const data = await useApi.post(`/api/auth/login`, payload);
-                this.accessToken = data?.access_token
+                const response = await useApi().post(`/api/auth/login`, payload);
+                const data = response.data
+                this.accessToken = data.data?.access_token
                 return data
             } catch (error: Error | any) {
                  throw error.response.message
@@ -50,7 +53,8 @@ export const useAuthStore = defineStore('auth', {
 
         async register(payload: RegisterData){
             try {
-                const data = await useApi.post(`/api/auth/login`, payload);
+                console.log("working register")
+                const data = await useApi().post(`/api/auth/register`, payload);
                 return data
             } catch (error: Error | any) {
                  throw error.response.message
@@ -59,7 +63,9 @@ export const useAuthStore = defineStore('auth', {
 
         async getUser(){
             try {
-                const data = await useApi.post(`/api/auth/user`);
+                const response = await useApi().get(`/api/auth/user`);
+                const data = response.data
+                this.user = data
                 return data
             } catch (error: Error | any) {
                  throw error.response.message
@@ -68,7 +74,9 @@ export const useAuthStore = defineStore('auth', {
 
         async logout(){
             try {
-                const data = await useApi.post(`/api/auth/logout`);
+                const data = await useApi().post(`/api/auth/logout`);
+                this.accessToken = ""
+                this.user = {} as User
                 return data
             } catch (error: Error | any) {
                  throw error.response.message
@@ -77,7 +85,9 @@ export const useAuthStore = defineStore('auth', {
 
         async refresh(){
             try {
-                const data = await useApi.post(`/api/auth/refresh`);
+                const response = await useApi().post(`/api/auth/refresh`);
+                const data = response.data
+                this.accessToken = data?.access_token
                 return data
             } catch (error: Error | any) {
                  throw error.response.message
