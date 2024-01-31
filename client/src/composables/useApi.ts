@@ -1,11 +1,12 @@
 import { axiosInstance } from '../utils/axios';
-import { userAuthStore } from '../stores/auth';
+import { useAuthStore } from '../stores/auth';
+import { watchEffect } from 'vue';
 
 export default function useApi(){
 
     const authStore = useAuthStore()
 
-   watchEffect(()=>{
+    watchEffect(()=>{
         axiosInstance.interceptors.request.use(
             (config) => {
                 if(!config.headers['Authorization']){
@@ -26,7 +27,7 @@ export default function useApi(){
                     await authStore.refresh()
 
                     prevRequest.headers["Authorization"] = authStore.accessToken
-                    return axiousInstance(prevRequest)
+                    return axiosInstance(prevRequest)
                 }
 
                 return Promise.reject(error)
