@@ -6,6 +6,7 @@
                 <h5 class="card-subtitle mb-2 text-muted">Email: {{ user.email }}</h5>
                 <h5 class="card-subtitle mb-2 text-muted">First Name: {{ user.first_name }}</h5>
                 <h5 class="card-subtitle mb-2 text-muted">Last Name: {{ user.last_name }}</h5>
+                <h5 class="card-subtitle mb-2 text-muted">Full Name: {{ user.full_name }}</h5>
 
             </div>
         </div>
@@ -16,19 +17,23 @@
 
 
 import { useAuthStore } from '../../stores/auth';
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const authStore = useAuthStore()
 
 const user = computed(()=>{
-    return authStore.user
+    console.log(authStore.userDetail)
+    return authStore.userDetail
 })
 
 async function getUser(){
     await authStore.getUser()
 }
 
-await getUser()
+onMounted(async ()=>{
+    console.log("onMounted triggered")
+    await getUser()
+})
 
 </script>
 

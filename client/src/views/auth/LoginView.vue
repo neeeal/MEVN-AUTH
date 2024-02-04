@@ -6,11 +6,11 @@
                 <form @submit.prevent="submit">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input v-mode="loginData.email" type="email" class="form-control" id="email">
+                        <input v-model="loginData.email" type="email" class="form-control" id="email">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input v-mode="loginData.password" type="password" class="form-control" id="password">
+                        <input v-model="loginData.password" type="password" class="form-control" id="password">
                     </div>
                     <button type="submit" class="btn btn-success">Login</button>
                 </form>

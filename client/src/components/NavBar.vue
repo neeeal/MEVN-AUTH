@@ -48,11 +48,16 @@ const authStore = useAuthStore()
 
 const router = useRouter()
 
-const user = computed(()=>{
-    return authStore.user
+const user = computed(()=>{ 
+  console.log('user')
+  console.log(authStore.userDetail)
+    return authStore.userDetail
 })
 
 const isAuthenticated = computed(()=>{
+  console.log('navbar')
+  console.log(authStore.userDetail)
+  console.log(authStore.isAuthenticated)
   return authStore.isAuthenticated
 })
 

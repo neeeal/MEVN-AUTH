@@ -20,7 +20,7 @@ async function register(req, res){
         
         return res.sendStatus(201)
     } catch(error) {
-        return res.stats(400).json({'message':'Could not register'})
+        return res.status(400).json({'message':'Could not register',"error":error})
     }
 }
 
@@ -61,7 +61,7 @@ async function login(req, res){
     await user.save()
 
     res.cookie('refresh_token', refreshToken, {httpOnly:true, maxAge:24*60*60*1000, sameSite: 'None', secure: true})
-    res.json({'access_token':accessToken})
+    res.json({'access_token':accessToken, 'user':user})
 
 }
 
@@ -115,7 +115,7 @@ async function refresh(req, res){
     )
 }
 
-async function user(req, res){
+async function user(req, res){ 
 
     const user = req.user
     console.log(req)
